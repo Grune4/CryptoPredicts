@@ -31,13 +31,13 @@ class MarketData(Base):
     last_updated = Column(DateTime)
 
 
-POSTGRES_USER = os.getenv("DB_USER")
-POSTGRES_PASSWORD = os.getenv("DB_PASSWORD")
-POSTGRES_HOST = os.getenv("DB_HOST")
-POSTGRES_PORT = os.getenv("DB_PORT")
-POSTGRES_DB = os.getenv("DB_NAME")
+POSTGRES_USER = os.getenv("DB_USER", "crypto")
+POSTGRES_PASSWORD = os.getenv("DB_PASSWORD", "crypto123")
+POSTGRES_HOST = os.getenv("DB_HOST", "db")
+POSTGRES_PORT = os.getenv("DB_PORT", "5432")
+POSTGRES_DB = os.getenv("DB_NAME", "crypto")
 
-DATABASE_URL = f"postgresql+psycopg2://postgres:test123@localhost:5432/postgres"
+DATABASE_URL = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 try:
     engine = create_engine(DATABASE_URL)
