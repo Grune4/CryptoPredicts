@@ -32,10 +32,10 @@ cd das-proekt
 cp .env.example .env
 
 # Build all images
-docker build -f backend/Dockerfile -t grune04/das-proekt-crypto-backend:latest .
-docker build -f frontend/Dockerfile -t grune04/das-proekt-crypto-frontend:latest .
-docker build -f scheduler/Dockerfile -t grune04/das-proekt-crypto-scheduler:latest .
-docker build -f analyze/Dockerfile -t grune04/das-proekt-crypto-analyzer:latest .
+docker build -f backend/Dockerfile -t grune4/das-proekt-crypto-backend:latest .
+docker build -f frontend/Dockerfile -t grune4/das-proekt-crypto-frontend:latest .
+docker build -f scheduler/Dockerfile -t grune4/das-proekt-crypto-scheduler:latest .
+docker build -f analyze/Dockerfile -t grune4/das-proekt-crypto-analyzer:latest .
 
 # Start all services
 docker-compose up -d
@@ -71,18 +71,18 @@ Automated CI/CD pipeline on every push to `main` branch:
 1. **Test Phase**: Runs backend Maven tests and frontend linting
 2. **Build Phase**: Builds Docker images for all 4 services
 3. **Push Phase**: Pushes images to DockerHub with tags:
-   - `grune04/das-proekt-crypto-{service}:latest`
-   - `grune04/das-proekt-crypto-{service}:{git-sha}`
+- `grune4/das-proekt-crypto-{service}:latest`
+  - `grune4/das-proekt-crypto-{service}:{git-sha}`
 
 **GitHub Actions Secrets Required:**
 ```
-DOCKER_USERNAME=grune04
+DOCKER_USERNAME=grune4
 DOCKER_PASSWORD=<DockerHub Personal Access Token>
 ```
 
 **Workflow File**: `.github/workflows/ci-cd.yml`
 
-**Repository**: https://github.com/Grune04/das-proekt-crypto
+**Repository**: https://github.com/Grune4/das-proekt-crypto
 
 ## Kubernetes Deployment
 
@@ -224,7 +224,7 @@ kubectl scale deployment/backend -n crypto-app --replicas=3
 
 # Rolling update with new image
 kubectl set image deployment/backend \
-  backend=grune04/das-proekt-crypto-backend:v1.0.0 \
+  backend=grune4/das-proekt-crypto-backend:v1.0.0 \
   -n crypto-app
 
 # Restart deployment (useful after config changes)

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: scheduler
-        image: grune04/das-proekt-crypto-scheduler:latest
+        image: grune4/das-proekt-crypto-scheduler:latest
         imagePullPolicy: Always
         env:
         - name: DB_HOST

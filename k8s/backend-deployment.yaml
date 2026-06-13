@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: grune04/das-proekt-crypto-backend:latest
+        image: grune4/das-proekt-crypto-backend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
