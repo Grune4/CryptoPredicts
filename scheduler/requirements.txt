@@ -1,0 +1,7 @@
+requests
+aiohttp
+sqlalchemy
+psycopg2-binary
+python-dotenv
+apscheduler
+pandas

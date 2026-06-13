@@ -1,0 +1,12 @@
+tensorflow
+fastapi
+uvicorn[standard]
+pandas
+numpy
+SQLAlchemy
+ta
+scikit-learn
+nltk
+requests
+psycopg2-binary
+httpx

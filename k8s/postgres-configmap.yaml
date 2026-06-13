@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+  namespace: crypto-app
+data:
+  init.sql: |
+    -- Initialize crypto database schema
+    -- Tables are created by SQLAlchemy ORM, but we ensure constraints exist
+    
+    -- Clean up duplicates and add unique constraints for crypto_ohlcv
+    DELETE FROM crypto_ohlcv a USING (
+      SELECT MIN(ctid) as keep_ctid, symbol, date
+      FROM crypto_ohlcv
+      GROUP BY symbol, date
+      HAVING COUNT(*) > 1
+    ) b
+    WHERE a.symbol = b.symbol 
+    AND a.date = b.date 
+    AND a.ctid <> b.keep_ctid;
+    
+    ALTER TABLE crypto_ohlcv 
+    ADD CONSTRAINT unique_symbol_date UNIQUE (symbol, date);
+    
+    -- Clean up duplicates and add unique constraints for market_data
+    DELETE FROM market_data a USING (
+      SELECT MIN(ctid) as keep_ctid, coingecko_id
+      FROM market_data
+      GROUP BY coingecko_id
+      HAVING COUNT(*) > 1
+    ) b
+    WHERE a.coingecko_id = b.coingecko_id 
+    AND a.ctid <> b.keep_ctid;
+    
+    ALTER TABLE market_data 
+    ADD CONSTRAINT unique_coingecko_id UNIQUE (coingecko_id);

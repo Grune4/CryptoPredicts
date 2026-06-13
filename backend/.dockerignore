@@ -1,0 +1,16 @@
+.git
+.gitignore
+.docker
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+README.md
+Crypto.iml
+mvnw.cmd
+.env
+.env.local
+target/docs
+target/site
