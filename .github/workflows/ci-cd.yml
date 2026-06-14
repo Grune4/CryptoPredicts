@@ -82,8 +82,8 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-backend:latest
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-backend:${{ env.IMAGE_TAG }}
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-backend:${{ env.IMAGE_TAG }}
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
@@ -92,8 +92,8 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-frontend:latest
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-frontend:${{ env.IMAGE_TAG }}
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-frontend:${{ env.IMAGE_TAG }}
 
       - name: Build and push scheduler image
         uses: docker/build-push-action@v5
@@ -102,8 +102,8 @@ jobs:
           file: ./scheduler/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-scheduler:latest
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-scheduler:${{ env.IMAGE_TAG }}
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-scheduler:latest
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-scheduler:${{ env.IMAGE_TAG }}
 
       - name: Build and push analyzer image
         uses: docker/build-push-action@v5
@@ -112,5 +112,5 @@ jobs:
           file: ./analyze/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-analyzer:latest
-            ${{ secrets.DOCKER_USERNAME }}/das-proekt-crypto-analyzer:${{ env.IMAGE_TAG }}
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-fastapi:latest
+            ${{ secrets.DOCKER_USERNAME }}/domasna4-fastapi:${{ env.IMAGE_TAG }}

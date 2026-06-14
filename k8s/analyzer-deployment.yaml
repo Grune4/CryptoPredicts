@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: analyzer
-        image: grune4/das-proekt-crypto-analyzer:latest
+        image: grune/domasna4-fastapi:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
