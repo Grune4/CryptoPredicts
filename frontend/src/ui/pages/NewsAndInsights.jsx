@@ -11,6 +11,7 @@ const NewsAndInsights = () => {
     const filters = ["all", "rising", "hot", "bullish", "bearish", "important", "saved", "lol"];
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLoading(true);
 
         cryptoMarketRepository.fetchNews(filter)

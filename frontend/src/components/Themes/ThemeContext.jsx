@@ -1,9 +1,6 @@
 // ThemeContext.jsx
-import React, { createContext, useState, useEffect, useContext } from "react";
-
-const ThemeContext = createContext();
-
-export const useTheme = () => useContext(ThemeContext);
+import { useState, useEffect } from "react";
+import { ThemeContext } from "./useTheme.js";
 
 export const ThemeProvider = ({children}) => {
     // Start with 'system' as default if nothing is in storage

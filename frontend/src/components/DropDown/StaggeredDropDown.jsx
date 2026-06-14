@@ -6,7 +6,7 @@ import {
     FiPlusSquare,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 const StaggeredDropDown = () => {
     const [open, setOpen] = useState(false);
