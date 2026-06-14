@@ -75,10 +75,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build backend JAR
+        run: |
+          cd backend
+          mvn clean package -DskipTests --batch-mode
+
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./backend
           file: ./backend/Dockerfile
           push: true
           tags: |
@@ -88,7 +100,7 @@ jobs:
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./frontend
           file: ./frontend/Dockerfile
           push: true
           tags: |
@@ -98,7 +110,7 @@ jobs:
       - name: Build and push scheduler image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./scheduler
           file: ./scheduler/Dockerfile
           push: true
           tags: |
@@ -108,7 +120,7 @@ jobs:
       - name: Build and push analyzer image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./analyze
           file: ./analyze/Dockerfile
           push: true
           tags: |
