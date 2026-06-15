@@ -4,6 +4,6 @@ metadata:
   name: scheduler-config
   namespace: crypto-app
 data:
-  DB_HOST: "postgres-0.postgres.default.svc.cluster.local"
+  DB_HOST: "postgres"
   DB_PORT: "5432"
   DB_NAME: "crypto"

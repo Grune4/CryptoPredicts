@@ -23,11 +23,11 @@ spec:
         - containerPort: 80
           name: http
         env:
-        - name: VITE_API_URL
+        - name: VITE_API_BASE_URL
           valueFrom:
             configMapKeyRef:
               name: frontend-config
-              key: VITE_API_URL
+              key: VITE_API_BASE_URL
         - name: VITE_ANALYZER_URL
           valueFrom:
             configMapKeyRef:

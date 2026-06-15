@@ -48,6 +48,11 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: DB_PASSWORD
+        - name: CRYPTOPANIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: CRYPTOPANIC_API_KEY
         - name: SPRING_PROFILES_ACTIVE
           valueFrom:
             configMapKeyRef:

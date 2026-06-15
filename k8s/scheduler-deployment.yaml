@@ -15,6 +15,48 @@ spec:
       labels:
         app: scheduler
     spec:
+      initContainers:
+      - name: wait-for-db-tables
+        image: postgres:15
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: scheduler-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: scheduler-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: scheduler-config
+              key: DB_NAME
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: scheduler-secret
+              key: DB_PASSWORD
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: scheduler-secret
+              key: DB_USER
+        command:
+        - sh
+        - -c
+        - |
+          until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\dt' | grep -q 'new_crypto_ohlcv'; do
+            echo "Waiting for new_crypto_ohlcv table..."
+            sleep 5
+          done
+          until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\dt' | grep -q 'market_data'; do
+            echo "Waiting for market_data table..."
+            sleep 5
+          done
+          echo "All tables found, starting scheduler..."
       containers:
       - name: scheduler
         image: grune/domasna4-scheduler:latest

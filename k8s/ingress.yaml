@@ -4,7 +4,6 @@ metadata:
   name: crypto-app-ingress
   namespace: crypto-app
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
@@ -27,13 +26,6 @@ spec:
             name: backend-service
             port:
               number: 8080
-      - path: /analyze
-        pathType: Prefix
-        backend:
-          service:
-            name: analyzer-service
-            port:
-              number: 8000
   - host: "crypto-app.local"
     http:
       paths:
@@ -51,10 +43,3 @@ spec:
             name: backend-service
             port:
               number: 8080
-      - path: /analyze
-        pathType: Prefix
-        backend:
-          service:
-            name: analyzer-service
-            port:
-              number: 8000
