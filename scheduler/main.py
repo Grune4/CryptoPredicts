@@ -13,7 +13,7 @@ from sqlalchemy.dialects.postgresql import insert
 Base = declarative_base()
 
 class CryptoOHLCV(Base):
-    __tablename__ = 'new_crypto_ohlcv'
+    __tablename__ = 'crypto_ohlcv'
     id = Column(Integer, primary_key=True)
     symbol = Column(String, index=True)
     name = Column(String, index=True)
@@ -26,11 +26,11 @@ class CryptoOHLCV(Base):
 
 
 load_dotenv()
-POSTGRES_USER = os.getenv("DB_USER", "crypto")
-POSTGRES_PASSWORD = os.getenv("DB_PASSWORD", "crypto123")
-POSTGRES_HOST = os.getenv("DB_HOST", "db")
-POSTGRES_PORT = os.getenv("DB_PORT", "5432")
-POSTGRES_DB = os.getenv("DB_NAME", "crypto")
+POSTGRES_USER = os.getenv("DB_USER")
+POSTGRES_PASSWORD = os.getenv("DB_PASSWORD")
+POSTGRES_HOST = os.getenv("DB_HOST")
+POSTGRES_PORT = os.getenv("DB_PORT")
+POSTGRES_DB = os.getenv("DB_NAME")
 
 DATABASE_URL = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
@@ -66,7 +66,7 @@ KRAKEN_OHLC_URL = "https://api.kraken.com/0/public/OHLC"
 KRAKEN_INTERVAL = '1440'
 
 CG_MARKET_LIST_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page={}&sparkline=False"
-CG_API_KEY = "CG-7skC7qTx6fnqG3WQjV2KagjH"
+CG_API_KEY = os.getenv("COINGECKO_API_KEY")
 
 TEN_YEARS_AGO = datetime.now(timezone.utc) - timedelta(days=365 * 10)
 

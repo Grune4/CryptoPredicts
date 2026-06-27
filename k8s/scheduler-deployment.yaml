@@ -17,7 +17,7 @@ spec:
     spec:
       initContainers:
       - name: wait-for-db-tables
-        image: postgres:15
+        image: postgres:18
         env:
         - name: DB_HOST
           valueFrom:
@@ -48,8 +48,8 @@ spec:
         - sh
         - -c
         - |
-          until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\dt' | grep -q 'new_crypto_ohlcv'; do
-            echo "Waiting for new_crypto_ohlcv table..."
+          until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\dt' | grep -q 'crypto_ohlcv'; do
+            echo "Waiting for crypto_ohlcv table..."
             sleep 5
           done
           until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\dt' | grep -q 'market_data'; do
@@ -87,10 +87,15 @@ spec:
             secretKeyRef:
               name: scheduler-secret
               key: DB_PASSWORD
+        - name: COINGECKO_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: scheduler-secret
+              key: COINGECKO_API_KEY
         resources:
           requests:
-            cpu: 100m
-            memory: 256Mi
-          limits:
             cpu: 500m
             memory: 512Mi
+          limits:
+            cpu: "2"
+            memory: 1Gi
