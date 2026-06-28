@@ -39,8 +39,8 @@ services:
       - "3000:80"
     depends_on:
       - backend
-    environment:
-      - VITE_API_URL=${VITE_API_BASE_URL}
+    volumes:
+      - ./frontend/nginx.compose.conf:/etc/nginx/conf.d/default.conf:ro
 
   backend:
     build: 
