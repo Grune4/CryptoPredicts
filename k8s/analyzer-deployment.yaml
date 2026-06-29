@@ -5,7 +5,6 @@ metadata:
   namespace: crypto-app
   labels:
     app: analyzer
-    argocd-test: "true"
 spec:
   replicas: 2
   selector:
